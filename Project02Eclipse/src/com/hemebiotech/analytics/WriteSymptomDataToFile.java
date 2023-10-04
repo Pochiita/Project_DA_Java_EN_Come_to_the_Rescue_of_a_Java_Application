@@ -22,13 +22,10 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
             writer = new FileWriter("result.out");
             for (Map.Entry<String, Integer> set :
             symptomsMap.entrySet()) {
-
-           // Printing all elements of a Map
-           System.out.println(set.getKey() + " = "
-                              + set.getValue());
-
-            writer.write(set.getKey()+" : "+set.getValue());
-       }
+                System.out.println(set.getKey()+" : "+set.getValue());
+            writer.write(set.getKey()+" : "+set.getValue()+"\n");
+            }
+            writer.close();
         }catch (IOException e) {
             e.printStackTrace();
         }
