@@ -14,21 +14,24 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
     public FileWriter writer; //new FileWriter ("result.out");
 
    
-
+    /**
+     * Generating a file that displays every symptom
+     * 
+     * @return null
+     */
 	@Override
     public void writeSymptoms(Map<String,Integer> symptoms){
         try{
-            Map<String,Integer> symptomsMap = symptoms;
             writer = new FileWriter("result.out");
             for (Map.Entry<String, Integer> set :
-            symptomsMap.entrySet()) {
+            symptoms.entrySet()) {
             writer.write(set.getKey()+" : "+set.getValue()+"\n");
             }
             writer.close();
         }catch (IOException e) {
             e.printStackTrace();
         }
-        return ;
+
     }
 
 }
