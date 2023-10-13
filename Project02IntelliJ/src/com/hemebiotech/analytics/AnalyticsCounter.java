@@ -7,7 +7,7 @@ import java.util.TreeMap;
 
 public class AnalyticsCounter {
 
-	private final ReadSymptomDataFromFile reader;
+	private final ISymptomReader reader;
 	private final WriteSymptomDataToFile writer;
 
 	/**
@@ -19,30 +19,27 @@ public class AnalyticsCounter {
 		this.writer = new WriteSymptomDataToFile();
 	}
 
-
 	/**
-	 * Generates a "result.out" file with all the symptoms sorted
+	 *
+	 * @return a list of symptoms from symptoms.txt
 	 */
-	public void generateSymptoms(){
-		// first get input
-		List<String> dataNotCounted = this.reader.getSymptoms();
+	public List<String> getSymptoms(){
+		return this.reader.getSymptoms();
+	}
 
-		Map<String,Integer> dataCounter = symptomsListGenerator(dataNotCounted);
-
-		Map<String,Integer> sortedData = symptomsSortingTypes(dataCounter);
-
+	public void writeSymptoms(Map<String,Integer> sortedData){
 		this.writer.writeSymptoms(sortedData);
 	}
 
 	/**
 	 *
-	 * @param raw_data expect a list of symptoms
+	 * @param rawData expect a list of symptoms
 	 * @return a map of all the symptoms counted
 	 */
-	public Map<String,Integer> symptomsListGenerator (List<String> raw_data){
+	public Map<String,Integer> countSymptoms(List<String> rawData){
 		HashMap<String,Integer> symptomsHashMap = new HashMap<>();
 
-		for (String item : raw_data ){
+		for (String item : rawData ){
 			if (symptomsHashMap.containsKey(item)){
 				symptomsHashMap.put(item, symptomsHashMap.get(item)+1);
 			}else{
@@ -57,7 +54,7 @@ public class AnalyticsCounter {
 	 * @param data is a map of symptoms
 	 * @return a new map with all symptoms sorted
 	 */
-	public Map<String,Integer> symptomsSortingTypes (Map<String,Integer> data){
+	public Map<String,Integer> sortSymptoms(Map<String,Integer> data){
 
         return new TreeMap<>(data);
 
