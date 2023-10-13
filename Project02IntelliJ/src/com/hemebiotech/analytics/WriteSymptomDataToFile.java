@@ -13,11 +13,9 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
     
     public FileWriter writer; //new FileWriter ("result.out");
 
-   
+
     /**
      * Generating a file that displays every symptom
-     * 
-     * @return null
      */
 	@Override
     public void writeSymptoms(Map<String,Integer> symptoms){
